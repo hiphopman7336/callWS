@@ -65,6 +65,7 @@ public class servTestCallws extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		log.info(getDateTimeCurrent().toString() +"|callWS|"+ "Start Application");
 		doGet(request, response);
 		System.out.println(request.getParameter("num"));
 		String num = request.getParameter("num");
@@ -285,7 +286,8 @@ public class servTestCallws extends HttpServlet {
 			System.out.println("----------------------------------------------------------------");
 		    System.out.println();
 		    
-		    log.info(getDateTimeCurrent().toString() +"_"+ new Gson().toJson(queryBARequest));
+		    log.info(getDateTimeCurrent().toString() +"|callWS|"+ queryBAEndpoint);
+		    log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(queryBARequest));
 		    
 		    res.put("req", new StringFormate().JSONFormate(queryBARequest));
 		    
@@ -293,7 +295,7 @@ public class servTestCallws extends HttpServlet {
 		
 				response = accountStub.queryBA_PS(queryBARequest);			
 				
-				log.info(getDateTimeCurrent().toString() +"_"+ new Gson().toJson(response));
+				log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(response));
 				
 				Result result = response.getContextIntegrator().getMessage().getIntegrationResult();
 				if(!result.isResult()) {
@@ -320,7 +322,11 @@ public class servTestCallws extends HttpServlet {
 			System.out.println("RBM_QueryBA_PS Fails!!!!");
 		}
 		
+		log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(data));
+		
 		res.put("res", Arrays.toString(data));
+		
+		log.info(getDateTimeCurrent().toString() +"|callWS|"+ "End Application");
 		return res;
 	}
 	
