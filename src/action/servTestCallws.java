@@ -202,8 +202,11 @@ public class servTestCallws extends HttpServlet {
 		JSONObject res = new JSONObject();
 		
 		try {
+			log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(request));
 			String pathENV = "http://10.1.71.67:7001/TOTBilling/ProxyServices/";  // UAT
 			response = HttpConnectionUtil.executePost(pathENV + wsName, request, timeout);
+			
+			log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(response));
 			
 			if (response == null){
 				System.out.println("nulllllllllllllllllllll");
@@ -298,6 +301,8 @@ public class servTestCallws extends HttpServlet {
 				log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(response));
 				
 				Result result = response.getContextIntegrator().getMessage().getIntegrationResult();
+				
+				log.info(getDateTimeCurrent().toString() +"|callWS|"+ new Gson().toJson(result));
 				if(!result.isResult()) {
 					System.out.println("queryBA_PS failed:[" + result.getEsbReturnMsg() + "]");
 				}else {
